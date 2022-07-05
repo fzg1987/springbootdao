@@ -25,21 +25,40 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findById(Integer id) {
-        return null;
+        return jdbcTemplate.queryForObject(
+                "select * from t_user where id=?",
+                new Object[]{id},
+                new BeanPropertyRowMapper<>(User.class)
+        );
     }
 
     @Override
     public int save(User user) {
-        return 0;
+        System.out.println("2222222222222");
+        return jdbcTemplate.update(
+                "insert into t_user(username,password,age) values (?,?,?)",
+                user.getUsername(),
+                user.getPassword(),
+                user.getAge()
+        );
     }
 
     @Override
     public int update(User user) {
-        return 0;
+        return jdbcTemplate.update(
+                "update t_user set username=?,password=?,age=? where id=?",
+                user.getUsername(),
+                user.getPassword(),
+                user.getAge(),
+                user.getId()
+        );
     }
 
     @Override
     public int deleteById(Integer id) {
-        return 0;
+        return jdbcTemplate.update(
+                "delete from t_user where id=?",
+                id
+        );
     }
 }
