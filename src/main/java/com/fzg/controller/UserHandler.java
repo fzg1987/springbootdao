@@ -1,10 +1,8 @@
 package com.fzg.controller;
 
 import com.fzg.entity.User;
-import com.fzg.repository.UserRepository;
 import com.fzg.repository.impl.UserRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +25,6 @@ public class UserHandler {
 
     @PostMapping("/save")
     public int save(@RequestBody User user){
-        System.out.println("1111111111111111");
         return userRepository.save(user);
     }
 
